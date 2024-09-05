@@ -33,35 +33,31 @@ class ImagePool():
 
             self.imagepool.append(img_dict)
 
-    def test_show(self,img_ndarray:np.ndarray):
-        plt.imshow(img_ndarray)
-        plt.show()
-
     def detect_parameters(self,img_name:str)->dict:
         para_dict=dict()
 
-        wavelength_pattern=re.compile(".?laser(\d+)nm.?")
+        wavelength_pattern=re.compile(r".?laser(\d+)nm.?")
         wavelength_match=re.match(wavelength_pattern,img_name)
         wavelength=wavelength_match.group(1) if wavelength_match else 0
         para_dict["wavelength"]=wavelength
 
-        x_pattern=re.compile(".+x(-?\d?\.\d+).+")
+        x_pattern=re.compile(r".+x(-?\d?\.\d+).+")
         x_match=re.match(x_pattern,img_name)
         x = x_match.group(1) if x_match else 0
         para_dict["x"]=x
 
-        y_pattern=re.compile(".+y(-?\d?\.\d+).+")
+        y_pattern=re.compile(r".+y(-?\d?\.\d+).+")
         y_match=re.match(y_pattern,img_name)
         y = y_match.group(1) if y_match else 0
         para_dict["y"]=y
 
-        fov_pattern=re.compile(".+fov(\d+)um.?")
+        fov_pattern=re.compile(r".+fov(\d+)um.?")
         fov_match=re.match(fov_pattern,img_name)
         fov = fov_match.group(1) if fov_match else 0
         para_dict["fov"]=fov
 
         return para_dict
 
-# a=ImagePool()
-# a.get_images()
-# print(a.imagepool[0]["ndarray"].mean())
+a=ImagePool()
+a.get_images()
+print(a.imagepool)
