@@ -84,7 +84,7 @@ class ImagePool():
     def full_img_process(self):
         for img_dict in tqdm.tqdm(self.imagepool):
             self.single_img_process(img_dict)
-        print(self.imagepool)
+        # print(self.imagepool)
 
 
         

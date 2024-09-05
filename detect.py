@@ -6,7 +6,8 @@ import copy
 
 class DetectMethod():
 
-    def __init__(self,img_array:np.ndarray=None):
+    def __init__(self,img_array:np.ndarray=None,blur:bool=True):
+        self.blur=blur
         self.img_array=img_array
 
     def test_init(self,img_path:str):
@@ -45,6 +46,10 @@ class DetectMethod():
         horizonal_img=rotate_image(*self.height_width,self.img_array,180*(angle/np.pi)-90)
 
         return horizonal_img
+    
+    def img_blur(self,img:np.ndarray):
+        image_blurred = cv2.GaussianBlur(img,ksize=(9,9),sigmaX=-1,sigmaY=-1)
+        return image_blurred
 
 
     def show_HOGE(self,lines:list[list]):
@@ -67,6 +72,8 @@ class DetectMethod():
 
     def detect_waveguide_row(self):
         horizon_img=self.horizontal_waveguide()
+        if self.blur:
+            horizon_img=self.img_blur(horizon_img)
 
         # normalize
         horizon_img = horizon_img/np.max(horizon_img)

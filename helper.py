@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import copy
 import cv2
+import shutil
 
 ROOT_DIR=os.path.dirname(__file__)
 
@@ -37,6 +38,9 @@ def rotate_image(height:int, width:int, img_array:np.ndarray, angle:float):
 
 def makedir(parent_folder:str,new_folder_name:str):
     new_folder_path = os.path.join(parent_folder, new_folder_name)
+
+    if os.path.exists(new_folder_path):
+        shutil.rmtree(new_folder_path)
 
     try:
         os.makedirs(new_folder_path, exist_ok=True)
