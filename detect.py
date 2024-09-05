@@ -16,7 +16,6 @@ class DetectMethod():
     @property
     def height_width(self):
         height,width =self.img_array.shape[0],self.img_array.shape[1]
-        print(height,width)
         return height,width
 
 

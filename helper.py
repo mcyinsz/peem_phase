@@ -44,7 +44,7 @@ def makedir(parent_folder:str,new_folder_name:str):
 
     try:
         os.makedirs(new_folder_path, exist_ok=True)
-        print(f'successfully create new folder: {new_folder_path}')
+        # print(f'successfully create new folder: {new_folder_path}')
     except Exception as e:
         print(f'error creating new folder: {e}')
 

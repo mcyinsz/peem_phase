@@ -6,6 +6,7 @@ from helper import *
 import re
 import matplotlib.pyplot as plt
 from detect import DetectMethod
+from phase import SignalProcessing
 import tqdm
 
 class ImagePool():
@@ -69,16 +70,22 @@ class ImagePool():
         
         img_result_folder=makedir(RESULT_DIR,img_dict["name"])
 
+
         # rotate and detect
         img_detect = DetectMethod(img_array)
         img_dict["strong_rows"], ref_img = img_detect.detect_waveguide_row()
         plt.imshow(ref_img)
         plt.savefig(os.path.join(img_result_folder,"ref_img.png"),dpi=600)
+        plt.close()
 
         # capture phase
         for signal_dict in img_dict["strong_rows"]:
             signal_result_folder=makedir(img_result_folder,str(signal_dict["start"]))
             np.save(os.path.join(signal_result_folder,"origin_signal.npy"),signal_dict["mean_signal"])
+            fov=img_dict["fov"]
+            signal_process=SignalProcessing(signal_result_folder,signal_dict["mean_signal"],fov)
+            signal_process.medium_filter()
+            
 
 
     def full_img_process(self):
