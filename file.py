@@ -5,12 +5,14 @@ import glob
 from helper import *
 import re
 import matplotlib.pyplot as plt
+from detect import DetectMethod
 
 class ImagePool():
 
     def __init__(self):
         pass
         self.imagepool:list[dict]=[]
+        self.get_images()
 
     def get_images_path(self)->list[str]:
         png_files = glob.glob(os.path.join(SRC_DIR, '*.png'))
@@ -57,7 +59,25 @@ class ImagePool():
         para_dict["fov"]=fov
 
         return para_dict
+    
+    def single_img_process(self,img_dict:dict):
+        try:
+            img_array=img_dict["ndarray"]
+        except:
+            raise Exception("img_array not correctly generated")
+        
+        # detect
+        img_detect = DetectMethod(img_array)
+        img_dict["strong_rows"]=img_detect.detect_waveguide_row()
+
+    def full_img_process(self):
+        for img_dict in self.imagepool:
+            self.single_img_process(img_dict)
+        print(self.imagepool)
+
+
+        
+
 
 a=ImagePool()
-a.get_images()
-print(a.imagepool)
+a.full_img_process()

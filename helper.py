@@ -9,6 +9,8 @@ ROOT_DIR=os.path.dirname(__file__)
 
 SRC_DIR=os.path.join(ROOT_DIR,"fig")
 
+SIGNAL_RATE=0.25
+
 
 
 def test_show(img:np.ndarray):
@@ -17,6 +19,10 @@ def test_show(img:np.ndarray):
 
 def test_scatter(point_list:list):
     plt.scatter(point_list[0],point_list[1])
+    plt.show()
+
+def test_plot(signal:np.ndarray):
+    plt.plot(signal)
     plt.show()
 
 

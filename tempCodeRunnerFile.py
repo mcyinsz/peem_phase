@@ -1,5 +1,5 @@
-test=DetectMethod()
-test.test_init("/home/mcyinsz/python_projects/peem_phase/fig/laser435nm_x-0.934y0.507fov30um.png")
-# test.show_HOGE(test.HOGE())
-angle=np.mean(np.array(test.HOGE()[1]))
-test_show(test.rotate_image(180*(angle/np.pi)-90))
+        # for row in range(horizon_img.shape[0]):
+        #     if np.mean(horizon_img[row])>0.25:
+        #         print(row,np.mean(horizon_img[row]))
+        #         plt.plot(horizon_img[row])
+        #         plt.show()
