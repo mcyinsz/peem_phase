@@ -2,6 +2,8 @@ import sys
 import os
 import matplotlib.pyplot as plt
 import numpy as np
+import copy
+import cv2
 
 ROOT_DIR=os.path.dirname(__file__)
 
@@ -18,3 +20,9 @@ def test_scatter(point_list:list):
     plt.show()
 
 
+def rotate_image(height:int, width:int, img_array:np.ndarray, angle:float):
+    image = copy.deepcopy(img_array)
+    center = (width // 2, height // 2)
+    rotation_matrix = cv2.getRotationMatrix2D(center, angle, 1.0)
+    rotated_image = cv2.warpAffine(image, rotation_matrix, (width, height))
+    return rotated_image

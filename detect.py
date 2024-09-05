@@ -26,25 +26,22 @@ class DetectMethod():
 
         image_blurred = cv2.GaussianBlur(self.img_array,ksize=(9,9),sigmaX=-1,sigmaY=-1)
         edges = cv2.Canny(image_blurred,threshold1=50,threshold2=100)
-        test_show(edges)
-        lines = cv2.HoughLines(edges,rho=1,theta=np.pi/180,threshold=86,min_theta=0,max_theta=np.pi)
+        lines = cv2.HoughLines(edges,rho=1,theta=np.pi/180,threshold=110,min_theta=0,max_theta=np.pi)
 
         # to print scatter
         lines = list(zip(*list(map(lambda x:x[0].tolist(),lines)))) # get x_list,y_list format data
-        test_scatter(lines)
         return lines
     
-    def rotate_image(self, angle):
-        image = copy.deepcopy(self.img_array)
-
-        (height, width) = self.height_width
+    def horizontal_waveguide(self):
+        lines=self.HOGE()
         
-        center = (width // 2, height // 2)
-        rotation_matrix = cv2.getRotationMatrix2D(center, angle, 1.0)
-
-        rotated_image = cv2.warpAffine(image, rotation_matrix, (width, height))
+        # get rotate angle
+        angle=np.mean(np.array(lines[1]))
         
-        return rotated_image
+        horizonal_img=rotate_image(*self.height_width,self.img_array,180*(angle/np.pi)-90)
+
+        return horizonal_img
+
 
 
     def show_HOGE(self,lines:list[list]):
@@ -67,8 +64,6 @@ class DetectMethod():
 
 
 
-# test=DetectMethod()
-# test.test_init("/home/mcyinsz/python_projects/peem_phase/fig/laser435nm_x-0.934y0.507fov30um.png")
-# # test.show_HOGE(test.HOGE())
-# angle=np.mean(np.array(test.HOGE()[1]))
-# test_show(test.rotate_image(180*(angle/np.pi)-90))
+test=DetectMethod()
+test.test_init("/home/mcyinsz/python_projects/peem_phase/fig/laser435nm_x-1.029y0.517fov10um_exp2s_avr8_obj2041.png")
+test_show(test.horizontal_waveguide())
