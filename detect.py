@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
+from helper import *
 
 class DetectMethod():
 
@@ -18,8 +19,7 @@ class DetectMethod():
 
         image_blurred = cv2.GaussianBlur(self.img_array,ksize=(9,9),sigmaX=-1,sigmaY=-1)
         edges = cv2.Canny(image_blurred,threshold1=50,threshold2=100)
-        plt.imshow(edges)
-        plt.show()
+        test_show(edges)
 
 
 

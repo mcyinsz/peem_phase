@@ -58,6 +58,6 @@ class ImagePool():
 
         return para_dict
 
-a=ImagePool()
-a.get_images()
-print(a.imagepool)
+# a=ImagePool()
+# a.get_images()
+# print(a.imagepool)
