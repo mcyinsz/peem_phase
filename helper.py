@@ -9,6 +9,8 @@ ROOT_DIR=os.path.dirname(__file__)
 
 SRC_DIR=os.path.join(ROOT_DIR,"fig")
 
+RESULT_DIR=os.path.join(ROOT_DIR,"result")
+
 SIGNAL_RATE=0.25
 
 
@@ -32,3 +34,14 @@ def rotate_image(height:int, width:int, img_array:np.ndarray, angle:float):
     rotation_matrix = cv2.getRotationMatrix2D(center, angle, 1.0)
     rotated_image = cv2.warpAffine(image, rotation_matrix, (width, height))
     return rotated_image
+
+def makedir(parent_folder:str,new_folder_name:str):
+    new_folder_path = os.path.join(parent_folder, new_folder_name)
+
+    try:
+        os.makedirs(new_folder_path, exist_ok=True)
+        print(f'successfully create new folder: {new_folder_path}')
+    except Exception as e:
+        print(f'error creating new folder: {e}')
+
+    return new_folder_path

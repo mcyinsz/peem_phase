@@ -99,13 +99,13 @@ class DetectMethod():
             assert len(strong_rows_dict)==3, "no valid strong rows"
             length=strong_rows_dict["end"]-strong_rows_dict["start"]+1
             strong_rows_dict["mean_signal"]=strong_rows_dict["mean_signal"]/length
-            print(strong_rows_dict)
+            # print(strong_rows_dict)
 
             # draw the referring line
             line_mean=(strong_rows_dict["start"]+strong_rows_dict["end"])//2
             cv2.line(horizon_img, (0,line_mean), (horizon_img.shape[1]-1,line_mean), 1, 2)
             
-            test_plot(strong_rows_dict["mean_signal"])
+            # test_plot(strong_rows_dict["mean_signal"])
 
-        test_show(horizon_img)
-        return strong_rows
+        # test_show(horizon_img)
+        return strong_rows, horizon_img

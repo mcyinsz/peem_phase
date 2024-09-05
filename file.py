@@ -6,6 +6,7 @@ from helper import *
 import re
 import matplotlib.pyplot as plt
 from detect import DetectMethod
+import tqdm
 
 class ImagePool():
 
@@ -66,12 +67,22 @@ class ImagePool():
         except:
             raise Exception("img_array not correctly generated")
         
-        # detect
+        img_result_folder=makedir(RESULT_DIR,img_dict["name"])
+
+        # rotate and detect
         img_detect = DetectMethod(img_array)
-        img_dict["strong_rows"]=img_detect.detect_waveguide_row()
+        img_dict["strong_rows"], ref_img = img_detect.detect_waveguide_row()
+        plt.imshow(ref_img)
+        plt.savefig(os.path.join(img_result_folder,"ref_img.png"),dpi=600)
+
+        # capture phase
+        for signal_dict in img_dict["strong_rows"]:
+            signal_result_folder=makedir(img_result_folder,str(signal_dict["start"]))
+            np.save(os.path.join(signal_result_folder,"origin_signal.npy"),signal_dict["mean_signal"])
+
 
     def full_img_process(self):
-        for img_dict in self.imagepool:
+        for img_dict in tqdm.tqdm(self.imagepool):
             self.single_img_process(img_dict)
         print(self.imagepool)
 
