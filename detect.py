@@ -9,5 +9,5 @@ class DetectMethod():
 
     def HOGE(self):
         ''''
-            use HOGE 
+            use HOGE and K-means to get waveguide
         '''
