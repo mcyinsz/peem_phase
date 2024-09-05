@@ -20,6 +20,8 @@ class DetectMethod():
         image_blurred = cv2.GaussianBlur(self.img_array,ksize=(9,9),sigmaX=-1,sigmaY=-1)
         edges = cv2.Canny(image_blurred,threshold1=50,threshold2=100)
         test_show(edges)
+        lines = cv2.HoughLines(edges,rho=1,theta=np.pi/180,threshold=86,min_theta=0,max_theta=2*np.pi)
+        print(lines)
 
 
 
