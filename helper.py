@@ -13,5 +13,8 @@ def test_show(img:np.ndarray):
     plt.imshow(img)
     plt.show()
 
-def test_scatter(point_list:list[tuple]):
-    
+def test_scatter(point_list:list):
+    plt.scatter(point_list[0],point_list[1])
+    plt.show()
+
+
