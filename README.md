@@ -12,6 +12,6 @@ A simple project to capture phase structure in images
 
 ## Run Sample
 
-''' bash
+``` bash
 bash scripts/run_main.sh
-'''
+```
