@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot 
 from helper import *
+from scipy.signal import hilbert
 
 
 class SignalProcessing():
@@ -40,10 +41,23 @@ class SignalProcessing():
 
 
         processed_output_ifft=self.iFFT(processed_output_fft)
+        plt.plot(self.signal,label="original signal")
         plt.plot(np.real(processed_output_ifft),label="clip FFT_iFFT")
+        plt.legend()
         plt.savefig(os.path.join(self.result_dir,"clip_signal.png"),dpi=600)
         plt.close()
         return processed_output_ifft
+    
+    def hilbert_phase(self,processed_output_ifft:np.ndarray):
+        hilbert_output=hilbert(np.real(processed_output_ifft))
+        output_angle=np.angle(hilbert_output)
+        plt.plot(output_angle)
+        plt.savefig(os.path.join(self.result_dir,"phase.png"),dpi=600)
+        plt.close()
+        np.save(os.path.join(self.result_dir,"phase.npy"),output_angle)
+        return output_angle
+
+
     
 
 

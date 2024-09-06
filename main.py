@@ -1,6 +1,9 @@
-import cv2
+from file import *
 
-class ImageMain():
+def main():
+    main_process=ImagePool()
+    main_process.full_img_process()
 
-    def __init__(self, imagepath:str):
-        self.image=
+
+if __name__ == "__main__":
+    main()

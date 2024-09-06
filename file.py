@@ -84,18 +84,10 @@ class ImagePool():
             np.save(os.path.join(signal_result_folder,"origin_signal.npy"),signal_dict["mean_signal"])
             fov=img_dict["fov"]
             signal_process=SignalProcessing(signal_result_folder,signal_dict["mean_signal"],fov)
-            signal_process.medium_filter()
-            
+            processed_output_ifft=signal_process.medium_filter()
+            signal_process.hilbert_phase(processed_output_ifft)
 
 
     def full_img_process(self):
         for img_dict in tqdm.tqdm(self.imagepool):
             self.single_img_process(img_dict)
-        # print(self.imagepool)
-
-
-        
-
-
-a=ImagePool()
-a.full_img_process()
