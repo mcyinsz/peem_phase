@@ -2,6 +2,15 @@
 
 A simple project to capture phase structure in images
 
+## Function
+
+* image processing
+    * detect the waveguide lines
+    * automaticly rotate images
+* signal processing
+    * do the FFT and filtering
+    * use Hilbert transformation to capture phase structure
+
 ## Requirements
 
 * numpy = 1.26.4
